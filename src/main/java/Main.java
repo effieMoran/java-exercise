@@ -5,16 +5,18 @@ import com.almundo.callcenter.enums.Position;
 import com.almundo.callcenter.enums.Status;
 
 import java.util.PriorityQueue;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.PriorityBlockingQueue;
 
 /**
- * Created by User on 6/4/2019.
+ * Created by Effie on 6/4/2019.
  */
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        PriorityQueue<Employee> employeeList = new PriorityQueue<>();
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        PriorityBlockingQueue<Employee> employeeList = new PriorityBlockingQueue<>();
         employeeList.add(new Employee("NINE", Status.AVAILABLE, Position.SUPERVISOR));
         employeeList.add(new Employee("EIGHT", Status.AVAILABLE, Position.SUPERVISOR));
         employeeList.add(new Employee("SEVEN", Status.AVAILABLE, Position.SUPERVISOR));
@@ -26,11 +28,17 @@ public class Main {
         employeeList.add(new Employee("SIX", Status.AVAILABLE, Position.OPERATOR));
         Dispatcher dispatcher = new Dispatcher(employeeList);
 
-        for(int i = 0; i<10 ; i++) {
+        executorService.execute(dispatcher);
 
-            Call call = new Call(20);//ThreadLocalRandom.current().nextInt(5, 10 + 1));
-            dispatcher.dispatchCall(call);
+        //dispatcher.run();
+        for(int i = 0; i<500 ; i++) {
+
+            Call call = new Call(20);
+            dispatcher.produceCall(call);
         }
 
+        dispatcher.setCallServiceWorking(false);
+        executorService.shutdown();
+        System.out.println("FINISHED!!!!!");
     }
 }

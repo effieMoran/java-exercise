@@ -5,14 +5,12 @@ import com.almundo.callcenter.enums.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 
 /**
  * Created by Effie on 6/4/2019.
  */
-public class Employee implements Comparable<Employee>, Runnable{
+public class Employee implements Comparable<Employee>{
 
     private String employeeName;
 
@@ -46,17 +44,16 @@ public class Employee implements Comparable<Employee>, Runnable{
         return position;
     }
 
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
     public void takeCall(Call call) {
         pendingCalls.add(call);
-//        status = Status.BUSY;
-//        try {
-//            Thread.sleep(call.getDuration() * 1000);
-//            logger.info(employeeName + " has taken a call");
-//        } catch (InterruptedException e){
-//            Thread.currentThread().interrupt();
-//            logger.error("There's been an issue with the call. Please, try again later.");
-//        }
-//        status = Status.AVAILABLE;
     }
 
     @Override
@@ -73,24 +70,6 @@ public class Employee implements Comparable<Employee>, Runnable{
         }
         return -1;
         //return  this.getPosition().compareTo(employee.getPosition());
-    }
-
-    @Override
-    public void run() {
-        //logger.info("The " + position + " " + employeeName + " starts to work.");
-        if (!pendingCalls.isEmpty()) {
-            Call call = pendingCalls.poll();
-            status = Status.BUSY;
-            try {
-                Thread.sleep(call.getDuration() * 1000);
-                logger.info(position + " " + employeeName + " has taken a call of " + call.getDuration());
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                logger.error("There's been an issue with the call. Please, try again later.");
-            }
-            logger.info("The call of " + call.getDuration() + " attended by " + employeeName+ " has finished");
-            status = Status.AVAILABLE;
-        }
     }
 
     @Override

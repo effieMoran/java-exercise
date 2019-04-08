@@ -16,7 +16,7 @@ public class DispatcherTest {
 
     @Test
     public void freeEmployee() {
-        PriorityQueue<Employee> employees = new PriorityQueue<>();
+        PriorityBlockingQueue<Employee> employees = new PriorityBlockingQueue<>();
         Employee employee1 = new Employee("Homer Simpson", Status.AVAILABLE, Position.MANAGER);
         Employee employee2 = new Employee("John Doe",Status.AVAILABLE, Position.SUPERVISOR);
         Employee employee3 =new Employee("John Snow",Status.AVAILABLE, Position.OPERATOR);
