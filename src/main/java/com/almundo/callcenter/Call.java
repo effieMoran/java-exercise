@@ -16,10 +16,31 @@ public class Call implements Runnable {
 
     private int duration;
 
+    private boolean finished = false;
+
+    private boolean interrupted = false;
+
     private static final Logger logger = LoggerFactory.getLogger(Call.class);
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
+
+    public boolean isInterrupted() {
+        return interrupted;
+    }
+
+    public void setInterrupted(boolean interrupted) {
+        this.interrupted = interrupted;
+    }
 
     /**
      * Creates an instance of a call.
+     *
      * @param duration The measure is seconds.
      */
     public Call(int duration) {
@@ -40,10 +61,12 @@ public class Call implements Runnable {
 
             logger.info("Call of duration " + duration + " started.");
             TimeUnit.SECONDS.sleep(duration);
+            finished = true;
 
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             logger.error("There's been an issue with your call and needs to be interrupted. ");
+            interrupted = true;
         }
 
         logger.info("Call of duration " + duration + " finished.");

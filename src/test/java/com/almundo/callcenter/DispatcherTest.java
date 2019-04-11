@@ -6,7 +6,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Optional;
-import java.util.PriorityQueue;
 import java.util.concurrent.PriorityBlockingQueue;
 
 /**
@@ -25,17 +24,17 @@ public class DispatcherTest {
         employees.add(employee2);
         employees.add(employee3);
 
-        Dispatcher dispatcher = new Dispatcher(employees);
+//        Dispatcher dispatcher = new Dispatcher(employees);
 
-        Optional<Employee> attendant = dispatcher.getCallAttender();
-        Assert.assertEquals(employee3, attendant.get());
-        employees.poll();
-
-        attendant = dispatcher.getCallAttender();
-        Assert.assertEquals(employee2, attendant.get());
-        employees.poll();
-
-        attendant = dispatcher.getCallAttender();
-        Assert.assertEquals(employee1, attendant.get());
+//        Optional<Employee> attendant = dispatcher.getAvailableEmployees();
+//        Assert.assertEquals(employee3, attendant.get());
+//        employees.poll();
+//
+//        attendant = dispatcher.getAvailableEmployees();
+//        Assert.assertEquals(employee2, attendant.get());
+//        employees.poll();
+//
+//        attendant = dispatcher.getAvailableEmployees();
+//        Assert.assertEquals(employee1, attendant.get());
     }
 }

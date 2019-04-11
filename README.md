@@ -10,7 +10,7 @@ debe ser atendida por un director.
 
 **Requerimientos**
 
-- [ ] Debe existir una clase Dispatcher encargada de manejar las
+- [x] Debe existir una clase Dispatcher encargada de manejar las
 llamadas, y debe contener el método dispatchCall para que las
 asigne a los empleados disponibles.
 
@@ -27,14 +27,15 @@ segundos.
 
 **Extras/Plus**
 
-- [ ] Dar alguna solución sobre qué pasa con una llamada cuando no hay
+- [x] Dar alguna solución sobre qué pasa con una llamada cuando no hay
 ningún empleado libre.
 
 `De no haber ningún empleado libre las llamadas quedan en una lista de espera hasta que se desocupa 
 algún empleado`
 
-- [ ] Dar alguna solución sobre qué pasa con una llamada cuando entran
+- [x] Dar alguna solución sobre qué pasa con una llamada cuando entran
 más de 10 llamadas concurrentes.
+
 
 
 - [ ] Agregar los tests unitarios que se crean convenientes.

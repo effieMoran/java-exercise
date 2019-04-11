@@ -18,7 +18,7 @@ public class Employee implements Comparable<Employee>{
 
     private Position position = Position.OPERATOR;
 
-    private LinkedList<Call> pendingCalls = new LinkedList<>();
+    private Call currentCall;
 
     private static final Logger logger = LoggerFactory.getLogger(Employee.class);
 
@@ -30,6 +30,14 @@ public class Employee implements Comparable<Employee>{
         this.employeeName = employeeName;
         this.status = status;
         this.position = position;
+    }
+
+    public Call getCurrentCall() {
+        return currentCall;
+    }
+
+    public void setCurrentCall(Call currentCall) {
+        this.currentCall = currentCall;
     }
 
     public Status getStatus() {
@@ -52,24 +60,13 @@ public class Employee implements Comparable<Employee>{
         this.employeeName = employeeName;
     }
 
-    public void takeCall(Call call) {
-        pendingCalls.add(call);
-    }
-
     @Override
     public int hashCode() {
         return position != null ? position.hashCode() : 0;
     }
 
     public int compareTo(Employee employee) {
-        if (this.position == employee.getPosition()) {
-            return 0;
-        }
-        else if ( this.position.getOrder() > employee.getPosition().getOrder()) {
-            return 1;
-        }
-        return -1;
-        //return  this.getPosition().compareTo(employee.getPosition());
+        return  this.getPosition().compareTo(employee.getPosition());
     }
 
     @Override
@@ -79,5 +76,12 @@ public class Employee implements Comparable<Employee>{
                 ", status=" + status +
                 ", position=" + position +
                 '}';
+    }
+
+    public boolean isAvailable() {
+        if (null != currentCall) {
+            return currentCall.isFinished() || currentCall.isInterrupted();
+        }
+        return true;
     }
 }
